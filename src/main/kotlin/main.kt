@@ -6,6 +6,7 @@ fun main() {
 
 data class Post(
     val id: Int, // Идентификатор записи
+    val ownerId: Int,// Идентификатор владельца стены, на которой размещена запись
     val fromId: Int, // Идентификатор автора записи
     val date: Long, // Время публикации записи
     val text: String, // Текст записи
@@ -36,6 +37,23 @@ data class Views(
 
 class WallService {
     private var posts = emptyArray<Post>()
+    private var nextId = 1
+
+    fun add(post: Post): Post { // добавление нового поста
+        val newPost = post.copy(id = nextId++)
+        posts += newPost
+        return posts.last()
+    }
+
+    fun updatePost(post: Post): Boolean {
+        for ((index, currentPost) in posts.withIndex()) {
+            if (currentPost.id == post.id) {
+                posts[index] = post
+                return true
+            }
+        }
+        return false
+    }
 
     fun getPosts(): Array<Post> {
         return posts
