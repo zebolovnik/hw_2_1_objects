@@ -55,7 +55,4 @@ class WallService {
         return false
     }
 
-//    fun getPosts(): Array<Post> {
-//        return posts
-//    }
 }
