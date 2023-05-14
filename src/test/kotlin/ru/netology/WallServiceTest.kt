@@ -16,7 +16,7 @@ class WallServiceTest {
     }
 
     @Test
-    fun updatePostExistingIdReturnTrue() {
+    fun updatePostExistingIdReturnTrue() { // проверяем успешное обновление записи с существующим ID
         val service = WallService()
         service.add(Post(1, 1, 1, System.currentTimeMillis(), "Text 1"))
         service.add(Post(2, 2, 2, System.currentTimeMillis(), "Text 2"))

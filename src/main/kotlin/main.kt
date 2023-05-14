@@ -35,6 +35,7 @@ data class Views(
     val count: Int = 0 // число просмотров записи
 )
 
+/* Хранение постов в массиве */
 class WallService {
     private var posts = emptyArray<Post>()
     private var nextId = 1
