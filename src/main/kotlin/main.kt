@@ -37,10 +37,83 @@ data class Post(
     val markedAsAds: Boolean = false, // Информация о том, содержит ли запись отметку «реклама»
     val isFavorite: Boolean = false, // true, если объект добавлен в закладки у текущего пользователя
     val donut: Donut = Donut(), // Информация о записи VK Donut
-    val postponedId: Int? = null // Идентификатор отложенной записи
-    //val attachments: List<Attachment>?,
+    val postponedId: Int? = null, // Идентификатор отложенной записи
+    val attachments: Array<Attachment>? = null
 )
 
+// TODO: блок Attachment
+interface Attachment {
+    val type: String
+}
+
+data class PhotoAttachment(
+    override val type: String = "photo",
+    val photo: Photo
+) : Attachment
+
+data class VideoAttachment(
+    override val type: String = "video",
+    val video: Video
+) : Attachment
+
+data class AudioAttachment(
+    override val type: String = "audio",
+    val audio: Audio
+) : Attachment
+
+data class NoteAttachment(
+    override val type: String = "note",
+    val note: Note
+) : Attachment
+
+data class MarketAttachment(
+    override val type: String = "market",
+    val market: Market
+) : Attachment
+
+data class Photo(
+    val id: Int,
+    val ownerId: Int,
+    val text: String,
+    val date: Int
+)
+
+data class Video(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val description: String,
+    val duration: Int,
+    val date: Int
+)
+
+data class Audio(
+    val id: Int,
+    val ownerId: Int,
+    val artist: String,
+    val title: String,
+    val duration: Int,
+    val date: Int
+)
+
+data class Note(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val text: String,
+    val date: Int
+)
+
+data class Market(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val description: String,
+    val price: Int,
+    val date: Int
+)
+
+// TODO: блок вложенных классов в Post
 data class Comments(
     val count: Int = 0, // количество комментариев
     val canPost: Boolean = false, // может ли текущий пользователь комментировать запись
@@ -101,7 +174,8 @@ data class Placeholder(
     val text: String = TODO() // поля, описывающие заглушку
 )
 
-/* Хранение постов в массиве */
+
+// TODO: Хранение постов в массиве
 class WallService {
     private var posts = emptyArray<Post>()
     private var nextId = 1
