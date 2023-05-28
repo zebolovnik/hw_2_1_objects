@@ -3,8 +3,8 @@ package ru.netology
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.netology.ru.netology.Post
-import ru.netology.ru.netology.WallService
+import ru.netology.date.Post
+import ru.netology.service.WallService
 
 
 class WallServiceTest {
