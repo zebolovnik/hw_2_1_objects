@@ -1,6 +1,6 @@
 package ru.netology.service
 
-import ru.netology.PostNotFoundExeption
+import ru.netology.PostNotFoundException
 import ru.netology.date.Comment
 import ru.netology.date.Post
 
@@ -40,7 +40,7 @@ class WallService {
             comments += comment
             return comments.last()
         } else {
-            throw PostNotFoundExeption("Пост с id_$postId не существует, - комментарий не удалось добавить.")
+            throw PostNotFoundException("Пост с id_$postId не существует, - комментарий не удалось добавить.")
         }
     }
 

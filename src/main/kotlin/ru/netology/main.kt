@@ -5,7 +5,7 @@ import ru.netology.date.Post
 import ru.netology.service.WallService
 import java.lang.RuntimeException
 
-class PostNotFoundExeption(message: String) : RuntimeException(message)
+class PostNotFoundException(message: String) : RuntimeException(message)
 fun main() {
     val service = WallService()
     val post = Post(
@@ -32,7 +32,7 @@ fun main() {
     try {
         val addedComment = service.createComment(1, comment)
         println("Комментарий добавлен: $addedComment")
-    } catch (e: PostNotFoundExeption) {
+    } catch (e: PostNotFoundException) {
         println("Error: ${e.message}")
     }
 }

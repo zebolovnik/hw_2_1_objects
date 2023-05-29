@@ -3,9 +3,9 @@ package ru.netology
 import org.junit.Test
 
 import org.junit.Assert.*
+import ru.netology.date.Comment
 import ru.netology.date.Post
 import ru.netology.service.WallService
-
 
 class WallServiceTest {
 
@@ -48,4 +48,40 @@ class WallServiceTest {
 
         assertFalse(result)
     }
+
+    @Test // Проверяем, что комментарий успешно добавляется к существующему посту:
+    fun shouldAddCommentToValidPost() {
+        val service = WallService()
+        val post = Post(
+            id = 0,
+            ownerId = 0,
+            fromId = 0,
+            date = 0,
+            text = "Test post"
+        )
+        val addedPost = service.add(post)
+        val comment = Comment(
+            id = 0,
+            postId = addedPost.id,
+            fromId = 0,
+            date = 0,
+            text = "Test comment"
+        )
+        val addedComment = service.createComment(addedPost.id, comment)
+        assertEquals(comment.text, addedComment.text)
+    }
+
+    @Test(expected = PostNotFoundException::class) // проверяем, что будет выброшено исключение PostNotFoundException, если мы попытаемся добавить комментарий к несуществующему посту
+    fun shouldThrowPostNotFoundException() {
+        val service = WallService()
+        val comment = Comment(
+            id = 0,
+            postId = 123,
+            fromId = 0,
+            date = 0,
+            text = "Test comment"
+        )
+        service.createComment(comment.postId, comment)
+    }
+
 }
